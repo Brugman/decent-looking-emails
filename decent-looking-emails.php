@@ -31,8 +31,14 @@ function build_html_email_message( $args )
 {
     $html = file_get_contents( __DIR__.'/template-01.html' );
 
+    // replace plain characters with formatted entitites
+    $args['message'] = wptexturize( $args['message'] );
     // make links clickable
     $args['message'] = make_clickable( $args['message'] );
+    // convert lone & characters into &#038;
+    $args['message'] = convert_chars( $args['message'] );
+    // convert entities
+    $args['message'] = htmlentities2( $args['message'] );
     // make paragraphs
     $args['message'] = wpautop( $args['message'] );
 
