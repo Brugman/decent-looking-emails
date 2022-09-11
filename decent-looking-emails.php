@@ -22,32 +22,14 @@ function d( $var )
  * Helpers.
  */
 
-// function set_wp_mail_content_type( $content_type )
-// {
-//     if ( $content_type == 'text/plain' )
-//         return 'text/html';
-
-//     return $content_type;
-// }
-
 function set_wp_mail_content_type_html()
 {
     return 'text/html';
 }
 
-// function set_wp_mail_content_type_plain()
-// {
-//     return 'text/plain';
-// }
-
 function build_html_email_message( $args )
 {
     $html = file_get_contents( __DIR__.'/template-01.html' );
-
-    // $args['message'] = htmlentities( $args['message'] );
-    // $args['message'] = preg_replace( '/http(.*)</', '<a href="http$1">http$1</a><', $args['message'] );
-    // $args['message'] = preg_replace( '#<(https?://[^*]+)>#', '$1', $args['message'] );
-    // $args['message'] = nl2br( $args['message'] );
 
     // make links clickable
     $args['message'] = make_clickable( $args['message'] );
@@ -58,7 +40,7 @@ function build_html_email_message( $args )
         '[SUBJECT]'   => $args['subject'],
         '[BODY]'      => $args['message'],
         '[PREHEADER]' => '',
-        '[FOOTER]'    => 'This email was powered by timbr.',
+        '[FOOTER]'    => '',
     ];
 
     return strtr( $html, $replacements );
@@ -69,29 +51,16 @@ function build_html_email_message( $args )
  */
 
 add_filter( 'wp_mail', function ( $args ) {
-    // d( 'intercepting' );
-    // d( $args );
-    // remove_filter( 'wp_mail_content_type', 'set_wp_mail_content_type_html' );
 
+    // enable HTML mails
     add_filter( 'wp_mail_content_type', 'set_wp_mail_content_type_html' );
 
+    // place message inside HTML template
     $args['message'] = build_html_email_message( $args );
 
     return $args;
 
 }, 10, 1 );
-
-/**
- * After sending email.
- */
-
-// add_action( 'wp_mail_succeeded', function ( $mail_data ) {
-//     d( 'this is wp_mail_succeeded' );
-// });
-
-// add_action( 'wp_mail_failed', function ( $error ) {
-//     d( 'this is wp_mail_failed' );
-// });
 
 /**
  * (TEMP) Trigger email manually.
@@ -113,5 +82,6 @@ add_action( 'admin_init', function () {
     );
 
     d( 'done' );
+
 });
 
