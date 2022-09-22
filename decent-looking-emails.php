@@ -64,14 +64,27 @@ function build_html_email_message( $args )
         }
     }
 
+    $top_image_html = '';
+    $bottom_image_html = '';
+
+    $top_image_url = apply_filters( 'dle_top_image_url', false );
+    $bottom_image_url = apply_filters( 'dle_bottom_image_url', false );
+
+    if ( $top_image_url )
+        $top_image_html = '<img src="'.$top_image_url.'" style="width: 100%;">';
+    if ( $bottom_image_url )
+        $bottom_image_html = '<img src="'.$bottom_image_url.'" style="width: 100%;">';
+
     $footer_html = apply_filters( 'dle_footer_html', '' );
 
     $replacements = [
-        '[SUBJECT]'   => $args['subject'],
-        '[BODY]'      => $args['message'],
-        '[LOGO]'      => $logo_html,
-        '[PREHEADER]' => '',
-        '[FOOTER]'    => $footer_html,
+        '[SUBJECT]'      => $args['subject'],
+        '[BODY]'         => $args['message'],
+        '[LOGO]'         => $logo_html,
+        '[TOP_IMAGE]'    => $top_image_html,
+        '[BOTTOM_IMAGE]' => $bottom_image_html,
+        '[PREHEADER]'    => '',
+        '[FOOTER]'       => $footer_html,
     ];
 
     return strtr( $html, $replacements );
@@ -104,6 +117,14 @@ add_filter( 'dle_logo_url', function ( $logo_url ) {
 
 add_filter( 'dle_logo_link', function ( $logo_link ) {
     return 'https://tweakers.net/';
+});
+
+// add_filter( 'dle_top_image_url', function ( $top_image_url ) {
+//     return 'https://i.imgur.com/WB9VbP0.jpg';
+// });
+
+add_filter( 'dle_bottom_image_url', function ( $bottom_image_url ) {
+    return 'https://i.imgur.com/T6vBwjM.jpg';
 });
 
 add_filter( 'dle_footer_html', function ( $footer_html ) {
