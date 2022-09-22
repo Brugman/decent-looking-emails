@@ -46,7 +46,7 @@ function build_html_email_message( $args )
         '[SUBJECT]'   => $args['subject'],
         '[BODY]'      => $args['message'],
         '[PREHEADER]' => '',
-        '[FOOTER]'    => '',
+        '[FOOTER]'    => apply_filters( 'dle_footer', '' ),
     ];
 
     return strtr( $html, $replacements );

@@ -57,3 +57,14 @@ https://github.com/johnbillion/wp_mail
 - (G-27) (MS) User activates their new site (to site admin)
 
 - (H-30) (MS) Site admin requests to delete site
+
+## Configuration
+
+### Footer
+
+```php
+add_filter( 'dle_footer', function ( $footer ) {
+    return 'A new footer was configured.<br>And a great footer it was.';
+});
+```
+
