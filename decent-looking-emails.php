@@ -33,7 +33,7 @@ function set_wp_mail_content_type_html()
 function build_html_email_message( $args )
 {
     // replace plain characters with formatted entitites
-    $args['message'] = wptexturize( $args['message'] );
+    // $args['message'] = wptexturize( $args['message'] );
     // make links clickable
     $args['message'] = make_clickable( $args['message'] );
     // convert lone & characters into &#038;
