@@ -76,6 +76,26 @@ add_filter( 'dle_logo_link', function ( $logo_url ) {
 });
 ```
 
+### Top Image
+
+Default: No image.
+
+```php
+add_filter( 'dle_top_image_url', function ( $top_image_url ) {
+    return 'https://i.imgur.com/WB9VbP0.jpg';
+});
+```
+
+### Bottom Image
+
+Default: No image.
+
+```php
+add_filter( 'dle_bottom_image_url', function ( $bottom_image_url ) {
+    return 'https://i.imgur.com/T6vBwjM.jpg';
+});
+```
+
 ### Footer
 
 Default: No footer.
