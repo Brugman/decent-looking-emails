@@ -99,8 +99,10 @@ add_filter( 'wp_mail', function ( $args ) {
     // enable HTML mails
     add_filter( 'wp_mail_content_type', 'set_wp_mail_content_type_html' );
 
+    // if the message is plain text
     // place message inside HTML template
-    $args['message'] = build_html_email_message( $args );
+    if ( strpos( $args['message'], '<html' ) === false )
+        $args['message'] = build_html_email_message( $args );
 
     return $args;
 
@@ -115,17 +117,17 @@ add_filter( 'dle_logo_url', function ( $logo_url ) {
     // return 'http://wptest2.test/wp-content/plugins/decent-looking-emails/example-logo.svg';
 });
 
-add_filter( 'dle_logo_link', function ( $logo_link ) {
-    return 'https://tweakers.net/';
-});
+// add_filter( 'dle_logo_link', function ( $logo_link ) {
+//     return 'https://tweakers.net/';
+// });
 
 // add_filter( 'dle_top_image_url', function ( $top_image_url ) {
 //     return 'https://i.imgur.com/WB9VbP0.jpg';
 // });
 
-add_filter( 'dle_bottom_image_url', function ( $bottom_image_url ) {
-    return 'https://i.imgur.com/T6vBwjM.jpg';
-});
+// add_filter( 'dle_bottom_image_url', function ( $bottom_image_url ) {
+//     return 'https://i.imgur.com/T6vBwjM.jpg';
+// });
 
 add_filter( 'dle_footer_html', function ( $footer_html ) {
     return 'A new footer was configured.<br>And a great footer it was.';
