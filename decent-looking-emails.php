@@ -7,6 +7,9 @@ Plugin Name: Decent Looking Emails
 if ( !defined( 'ABSPATH' ) )
     exit;
 
+// temp
+include 'test-email.php';
+
 /**
  * Dev helpers.
  */
@@ -91,25 +94,19 @@ add_filter( 'wp_mail', function ( $args ) {
 }, 10, 1 );
 
 /**
- * (TEMP) Trigger email manually.
+ * Configuration.
  */
 
-add_action( 'admin_init', function () {
+add_filter( 'dle_logo_url', function ( $logo_url ) {
+    return 'https://i.imgur.com/RmBsEcf.png';
+    // return 'http://wptest2.test/wp-content/plugins/decent-looking-emails/example-logo.svg';
+});
 
-    if ( $_SERVER['QUERY_STRING'] != 'sendmail' )
-        return;
+add_filter( 'dle_logo_link', function ( $logo_link ) {
+    return 'https://tweakers.net/';
+});
 
-    d( 'sending some regular ass email' );
-
-    $message = "Line 1.\nLine 2.\n\nLine 3 is longer.\n\nLine 4.\nLine 5.";
-
-    wp_mail(
-        'example@example.org', // to
-        'i am the subject', // subject
-        $message, // message
-    );
-
-    d( 'done' );
-
+add_filter( 'dle_footer_html', function ( $footer_html ) {
+    return 'A new footer was configured.<br>And a great footer it was.';
 });
 
