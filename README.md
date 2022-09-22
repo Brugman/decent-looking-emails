@@ -60,10 +60,28 @@ https://github.com/johnbillion/wp_mail
 
 ## Configuration
 
-### Footer
+### Logo
+
+Default: No logo.
 
 ```php
-add_filter( 'dle_footer', function ( $footer ) {
+add_filter( 'dle_logo_url', function ( $logo_url ) {
+    return 'https://i.imgur.com/RmBsEcf.png';
+});
+```
+
+```php
+add_filter( 'dle_logo_link', function ( $logo_url ) {
+    return 'https://tweakers.net/';
+});
+```
+
+### Footer
+
+Default: No footer.
+
+```php
+add_filter( 'dle_footer_html', function ( $footer_html ) {
     return 'A new footer was configured.<br>And a great footer it was.';
 });
 ```

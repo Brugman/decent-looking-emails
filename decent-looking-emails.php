@@ -42,11 +42,33 @@ function build_html_email_message( $args )
     // make paragraphs
     $args['message'] = wpautop( $args['message'] );
 
+    $logo_html = '';
+
+    $logo_url = apply_filters( 'dle_logo_url', false );
+    $logo_link = apply_filters( 'dle_logo_link', false );
+
+    if ( $logo_url )
+    {
+        if ( $logo_link )
+        {
+            $logo_html .= '<a href="'.$logo_link.'" target="_blank">';
+            $logo_html .= '<img src="'.$logo_url.'">';
+            $logo_html .= '</a>';
+        }
+        else
+        {
+            $logo_html .= '<img src="'.$logo_url.'">';
+        }
+    }
+
+    $footer_html = apply_filters( 'dle_footer_html', '' );
+
     $replacements = [
         '[SUBJECT]'   => $args['subject'],
         '[BODY]'      => $args['message'],
+        '[LOGO]'      => $logo_html,
         '[PREHEADER]' => '',
-        '[FOOTER]'    => apply_filters( 'dle_footer', '' ),
+        '[FOOTER]'    => $footer_html,
     ];
 
     return strtr( $html, $replacements );
