@@ -53,12 +53,12 @@ function build_html_email_message( $args )
         if ( $logo_link )
         {
             $logo_html .= '<a href="'.$logo_link.'" target="_blank">';
-            $logo_html .= '<img src="'.$logo_url.'">';
+            $logo_html .= '<img class="img-responsive" src="'.$logo_url.'">';
             $logo_html .= '</a>';
         }
         else
         {
-            $logo_html .= '<img src="'.$logo_url.'">';
+            $logo_html .= '<img class="img-responsive" src="'.$logo_url.'">';
         }
     }
 
@@ -69,9 +69,9 @@ function build_html_email_message( $args )
     $bottom_image_url = apply_filters( 'dle_bottom_image_url', false );
 
     if ( $top_image_url )
-        $top_image_html = '<img src="'.$top_image_url.'" style="width: 100%;">';
+        $top_image_html = '<img class="img-responsive" src="'.$top_image_url.'" style="width: 100%;">';
     if ( $bottom_image_url )
-        $bottom_image_html = '<img src="'.$bottom_image_url.'" style="width: 100%;">';
+        $bottom_image_html = '<img class="img-responsive" src="'.$bottom_image_url.'" style="width: 100%;">';
 
     $footer_html = apply_filters( 'dle_footer_html', '' );
 
