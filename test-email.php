@@ -15,7 +15,7 @@ add_action( 'admin_init', function () {
 
     wp_mail(
         'example@example.org', // to
-        'i am the subject', // subject
+        'i am the subject '.wp_rand( 1, 999 ), // subject
         $message, // message
     );
 
