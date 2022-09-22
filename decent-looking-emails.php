@@ -32,8 +32,6 @@ function set_wp_mail_content_type_html()
 
 function build_html_email_message( $args )
 {
-    $html = file_get_contents( __DIR__.'/template-01.html' );
-
     // replace plain characters with formatted entitites
     $args['message'] = wptexturize( $args['message'] );
     // make links clickable
@@ -86,6 +84,8 @@ function build_html_email_message( $args )
         '[PREHEADER]'    => '',
         '[FOOTER]'       => $footer_html,
     ];
+
+    $html = file_get_contents( __DIR__.'/template-01.html' );
 
     return strtr( $html, $replacements );
 }
