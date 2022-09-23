@@ -2,6 +2,13 @@
 
 /*
 Plugin Name: Decent Looking Emails
+Plugin URI: https://timbr.dev
+Description: Convert the plain text emails that WordPress sends into decent looking HTML emails.
+Version: 0.1.0
+Author: Tim Brugman
+Author URI: https://timbr.dev
+Network: false
+License: GPLv2
 */
 
 if ( !defined( 'ABSPATH' ) )
