@@ -8,17 +8,30 @@ if ( !defined( 'ABSPATH' ) )
     exit;
 
 // temp
-include 'test-email.php';
+if ( file_exists( 'test-email.php' ) )
+    include 'test-email.php';
 
 /**
  * Dev helpers.
  */
 
-function d( $var )
+if ( !function_exists( 'd' ) )
 {
-    echo "<pre style=\"max-height: 800px; z-index: 9999; position: relative; overflow-y: scroll; white-space: pre-wrap; word-wrap: break-word; padding: 10px 15px; border: 1px solid #fff; background-color: #161616; text-align: left; line-height: 1.5; font-family: Courier; font-size: 16px; color: #fff; \">";
-    print_r( $var );
-    echo "</pre>";
+    function d( $var )
+    {
+        echo "<pre style=\"max-height: 800px; z-index: 9999; position: relative; overflow-y: scroll; white-space: pre-wrap; word-wrap: break-word; padding: 10px 15px; border: 1px solid #fff; background-color: #161616; text-align: left; line-height: 1.5; font-family: Courier; font-size: 16px; color: #fff; \">";
+        print_r( $var );
+        echo "</pre>";
+    }
+}
+
+if ( !function_exists( 'dd' ) )
+{
+    function dd( $var )
+    {
+        d( $var );
+        exit;
+    }
 }
 
 /**
@@ -32,8 +45,6 @@ function set_wp_mail_content_type_html()
 
 function build_html_email_message( $args )
 {
-    // replace plain characters with formatted entitites
-    // $args['message'] = wptexturize( $args['message'] );
     // make links clickable
     $args['message'] = make_clickable( $args['message'] );
     // convert lone & characters into &#038;
@@ -43,9 +54,10 @@ function build_html_email_message( $args )
     // make paragraphs
     $args['message'] = wpautop( $args['message'] );
 
+    // build logo html
     $logo_html = '';
 
-    $logo_url = apply_filters( 'dle_logo_url', false );
+    $logo_url  = apply_filters( 'dle_logo_url', false );
     $logo_link = apply_filters( 'dle_logo_link', false );
 
     if ( $logo_url )
@@ -62,10 +74,11 @@ function build_html_email_message( $args )
         }
     }
 
-    $top_image_html = '';
+    // build top and bottom image html
+    $top_image_html    = '';
     $bottom_image_html = '';
 
-    $top_image_url = apply_filters( 'dle_top_image_url', false );
+    $top_image_url    = apply_filters( 'dle_top_image_url', false );
     $bottom_image_url = apply_filters( 'dle_bottom_image_url', false );
 
     if ( $top_image_url )
@@ -73,8 +86,13 @@ function build_html_email_message( $args )
     if ( $bottom_image_url )
         $bottom_image_html = '<img class="img-responsive" src="'.$bottom_image_url.'" style="width: 100%;">';
 
+    // get footer html
     $footer_html = apply_filters( 'dle_footer_html', '' );
 
+    // get the template
+    $html = file_get_contents( __DIR__.'/template-01.html' );
+
+    // prepare replacements
     $replacements = [
         '[SUBJECT]'      => $args['subject'],
         '[BODY]'         => $args['message'],
@@ -85,8 +103,7 @@ function build_html_email_message( $args )
         '[FOOTER]'       => $footer_html,
     ];
 
-    $html = file_get_contents( __DIR__.'/template-01.html' );
-
+    // make replacements
     return strtr( $html, $replacements );
 }
 
@@ -99,37 +116,14 @@ add_filter( 'wp_mail', function ( $args ) {
     // enable HTML mails
     add_filter( 'wp_mail_content_type', 'set_wp_mail_content_type_html' );
 
-    // if the message is plain text
+    // if the message is already html, do nothing
+    if ( strpos( $args['message'], '<html' ) !== false )
+        return $args;
+
     // place message inside HTML template
-    if ( strpos( $args['message'], '<html' ) === false )
-        $args['message'] = build_html_email_message( $args );
+    $args['message'] = build_html_email_message( $args );
 
     return $args;
 
 }, 10, 1 );
-
-/**
- * Configuration.
- */
-
-add_filter( 'dle_logo_url', function ( $logo_url ) {
-    return 'https://i.imgur.com/RmBsEcf.png';
-    // return 'http://wptest2.test/wp-content/plugins/decent-looking-emails/example-logo.svg';
-});
-
-// add_filter( 'dle_logo_link', function ( $logo_link ) {
-//     return 'https://tweakers.net/';
-// });
-
-// add_filter( 'dle_top_image_url', function ( $top_image_url ) {
-//     return 'https://i.imgur.com/WB9VbP0.jpg';
-// });
-
-// add_filter( 'dle_bottom_image_url', function ( $bottom_image_url ) {
-//     return 'https://i.imgur.com/T6vBwjM.jpg';
-// });
-
-add_filter( 'dle_footer_html', function ( $footer_html ) {
-    return 'A new footer was configured.<br>And a great footer it was.';
-});
 
