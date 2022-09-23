@@ -45,6 +45,9 @@ function set_wp_mail_content_type_html()
 
 function build_html_email_message( $args )
 {
+    // make backup
+    $original_message = $args['message'];
+
     // make links clickable
     $args['message'] = make_clickable( $args['message'] );
     // convert lone & characters into &#038;
@@ -90,7 +93,12 @@ function build_html_email_message( $args )
     $footer_html = apply_filters( 'dle_footer_html', '' );
 
     // get the template
-    $html = file_get_contents( __DIR__.'/template-01.html' );
+    $template_path = apply_filters( 'dle_template', __DIR__.'/template-01.html' );
+
+    if ( !file_exists( $template_path ) )
+        return $original_message;
+
+    $html = file_get_contents( $template_path );
 
     // prepare replacements
     $replacements = [

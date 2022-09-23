@@ -60,3 +60,11 @@ add_filter( 'dle_bottom_image_url', function ( $bottom_image_url ) {
 });
 ```
 
+### Template
+
+```php
+add_filter( 'dle_template', function ( $template_path ) {
+    return '/full/path/to/your/template.html';
+});
+```
+
