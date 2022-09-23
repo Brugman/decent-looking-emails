@@ -8,6 +8,16 @@ It's what I wanted from [WP Better Emails](https://wordpress.org/plugins/wp-bett
 
 ## Configuration
 
+### Template
+
+Default: `template-01.html`, provided with the plugin.
+
+```php
+add_filter( 'dle_template', function ( $template_path ) {
+    return '/full/path/to/your/template.html';
+});
+```
+
 ### Logo
 
 Default: No logo.
@@ -57,14 +67,6 @@ Default: No image.
 ```php
 add_filter( 'dle_bottom_image_url', function ( $bottom_image_url ) {
     return 'https://example.org/path-to-your-image.png';
-});
-```
-
-### Template
-
-```php
-add_filter( 'dle_template', function ( $template_path ) {
-    return '/full/path/to/your/template.html';
 });
 ```
 
