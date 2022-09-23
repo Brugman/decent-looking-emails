@@ -31,7 +31,7 @@ add_filter( 'dle_logo_url', function ( $logo_url ) {
 Default: No link.
 
 ```php
-add_filter( 'dle_logo_link', function ( $logo_url ) {
+add_filter( 'dle_logo_link', function ( $logo_link ) {
     return 'https://example.org/';
 });
 ```
