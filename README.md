@@ -8,6 +8,8 @@ It's what I wanted from [WP Better Emails](https://wordpress.org/plugins/wp-bett
 
 ## Configuration
 
+Configuration is not required, but I recommend a logo, logo link and footer.
+
 ### Template
 
 Default: `template-01.html`, provided with the plugin.
