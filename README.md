@@ -1,7 +1,5 @@
 # Decent Looking Emails
 
-Work in progress. Use at your own risk.
-
 A WordPress plugin that upgrades your system emails to HTML, with templates, without a UI.
 
 It's what I wanted from [WP Better Emails](https://wordpress.org/plugins/wp-better-emails/) and [Email Template Designer](https://wordpress.org/plugins/wp-html-mail/) without all the fancy UI, with modern default templates, and without the bugs. This plugin does not fuck with your the senders' name or email address. You can blindly throw this at a fresh install and know your system emails are now actually decent looking, and not from 1999.
