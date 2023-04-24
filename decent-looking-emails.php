@@ -1,18 +1,21 @@
 <?php
 
-/*
-Plugin Name: Decent Looking Emails
-Plugin URI: https://timbr.dev
-Description: Convert the plain text emails that WordPress sends into decent looking HTML emails.
-Version: 0.1.0
-Author: Tim Brugman
-Author URI: https://timbr.dev
-Network: false
-License: GPLv2
-*/
+/**
+ * Plugin Name:       Decent Looking Emails
+ * Plugin URI:        https://github.com/Brugman/decent-looking-emails/
+ * Description:       Convert the plain text emails that WordPress sends into decent looking HTML emails.
+ * Version:           0.1.0
+ * Requires at least: 6.0
+ * Requires PHP:      7.4
+ * Author:            Medium Rare
+ * Author URI:        https://mediumrare.dev/
+ * License:           GPLv3
+ * License URI:       http://www.gnu.org/licenses/gpl-3.0.txt
+ * Text Domain:       decent-looking-emails
+ * Domain Path:       /languages
+ */
 
-if ( !defined( 'ABSPATH' ) )
-    exit;
+defined( 'ABSPATH' ) || exit;
 
 // temp
 if ( file_exists( 'test-email.php' ) )
