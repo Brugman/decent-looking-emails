@@ -17,10 +17,6 @@
 
 defined( 'ABSPATH' ) || exit;
 
-// temp
-if ( file_exists( 'test-email.php' ) )
-    include 'test-email.php';
-
 /**
  * Dev helpers.
  */
@@ -43,6 +39,10 @@ if ( !function_exists( 'dd' ) )
         exit;
     }
 }
+
+// temp
+if ( file_exists( 'test-email.php' ) )
+    include 'test-email.php';
 
 /**
  * Helpers.
