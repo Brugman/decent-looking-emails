@@ -132,7 +132,7 @@ add_filter( 'wp_mail', function ( $args ) {
     add_filter( 'wp_mail_content_type', 'set_wp_mail_content_type_html' );
 
     // if the message is already html, do nothing
-    if ( strpos( $args['message'], '<html' ) !== false )
+    if ( strpos( strtolower( $args['message'] ), '<html' ) !== false )
         return $args;
 
     // place message inside HTML template
