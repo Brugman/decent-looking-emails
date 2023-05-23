@@ -62,8 +62,6 @@ function build_html_email_message( $args )
     $args['message'] = make_clickable( $args['message'] );
     // convert lone & characters into &#038;
     $args['message'] = convert_chars( $args['message'] );
-    // convert entities
-    $args['message'] = htmlentities2( $args['message'] );
     // make paragraphs
     $args['message'] = wpautop( $args['message'] );
 
